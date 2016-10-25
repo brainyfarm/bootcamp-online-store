@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/dashboard', function(req, res, next){
+  /* If no user is signed in */
+  if(!global.currentUser)
+    res.redirect('/login');
+    
   res.render('dashboard', {title: 'Dashboard', currentUser : global.currentUser});
 })
 
