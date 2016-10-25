@@ -1,31 +1,73 @@
-<title> <%= title %> </title>        
+<% include partial/head %>
 
-<form class="" action="signup" method="POST">
-        <h3> Create an account </h3>
-        
-        
-        <div class="input-field ">
-                <input name="lastname" id="lastname" type="text" class="validate" require>
-                <label for="lastname">Last name</label>
+    <div class="section no-pad-bot" id="index-banner">
+
+    <div class="container">
+
+<a href="/">
+    <h3 class="header teal-text arial center">ONLINE STORE</h3>
+</a>
+        <div class="row">
+
+            <div class="col s3">
+            </div>
+
+            <div class="col s6">
+
+                <div class="card ">
+
+
+                    <div class="card-action teal ">
+                        <h6 class="center white-text">CREATE AN ACCOUNT</h6>
+                    </div>
+
+
+                    <div class="card-content ">
+
+                        <form class="" action="signup" method="POST">
+
+                            <div class="input-field ">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input name="firstname" id="firstname" type="text" class="validate" required>
+                                <label for="firstname">Firstname</label>
+                            </div>
+
+
+                            <div class="input-field ">
+                                <i class="material-icons prefix">mail</i>
+                                <input name="email" id="email" type="email" class="validate" required>
+                                <label for="email">Email</label>
+                            </div>
+
+
+
+                            <div class="input-field ">
+                                <i class="material-icons prefix">lock</i>
+                                <input name="password" id="password" type="password" class="validate" required>
+                                <label for="password">Password</label>
+                            </div>
+
+
+                            <div class="input-field">
+                                <button class="waves-effect waves-light btn btn-large">
+                                <i class="material-icons left">lock_open</i>Signup
+                            </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="card-action teal">
+                        <a href="/login">Already Registered?</a>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        
-        <div class="input-field ">
-                <input name="email" id="email" type="email" class="validate" require>
-                <label for="email">Email</label>
-        </div>
+    </div>
 
-
-
-        <div class="input-field ">
-                <input name="password" id="password" type="password" class="validate" require>
-                <label for="password">Password</label>
-        </div>
-
-
-        <div class="input-field">
-                <button class="">
-                Register
-                </button>
-        </div>
-</form>
+</div>
