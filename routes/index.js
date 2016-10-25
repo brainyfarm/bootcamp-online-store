@@ -23,7 +23,7 @@ router.post('/signup', function(req, res) {
   // Getting email and password variables
   var email = req.body.email;
   var password = req.body.password;
-  var lastName = req.body.lastname;
+  var firstName = req.body.firstname;
 
   firebase.auth()
   .createUserWithEmailAndPassword(email, password)
@@ -43,7 +43,7 @@ router.post('/signup', function(req, res) {
         // Write the user joined date to the user table in db
         usersRef.set({
               joined: new Date().toISOString(), 
-              lastname: lastName
+              firstname: firstName
         })
 
         res.redirect('/dashboard');
