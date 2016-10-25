@@ -11,8 +11,34 @@ router.get('/dashboard', function(req, res, next){
   /* If no user is signed in */
   if(!global.currentUser)
     res.redirect('/login');
+
+  var db = firebase.database();
+  var ref = db.ref('/');
+  var usersRef = ref.child("users/" + global.currentUserID  +'/' );
+  var userStoreRef = ref.child("stores/" + global.currentUserID  +'/' );
+
+  usersRef.on('value', function(snapshot){
+    console.log(snapshot.val());
+    var userName = snapshot.val().firstname;
+      // console.log(userName);
+
+      userStoreRef.on('value', function(snapshot){
+          var userStoreObject = snapshot.val();
+          var userLink;
+          if(!userStoreObject){
+            userLink = null;
+          }
+          else{
+            userLink = userStoreObject.link;
+          }
+          console.log(userStoreObject);
+          res.render('dashboard', {title: 'Dashboard', currentUser : global.currentUser, currentUserName : userName, currentUserLink: userStoreObject });
+
+      })
+     
+
+  })
     
-  res.render('dashboard', {title: 'Dashboard', currentUser : global.currentUser});
 })
 
 router.get('/signup', function(req, res, next) {
@@ -46,6 +72,8 @@ router.post('/signup', function(req, res) {
               firstname: firstName
         })
 
+
+
         res.redirect('/dashboard');
     })
 
@@ -78,8 +106,6 @@ router.post('/login', function(req, res) {
         global.currentUser = userObject.email;
         global.currentUserID = userObject.uid;
 
-
-
         var userID = userObject.uid;
 
         console.log(userID);
@@ -87,10 +113,6 @@ router.post('/login', function(req, res) {
         var db = firebase.database();
         var ref = db.ref('/');
         var usersRef = ref.child("users/" + userID );
-
-      
-
-
 
         res.redirect('/dashboard');
     })
@@ -103,4 +125,8 @@ router.post('/login', function(req, res) {
     })
 });
 
+router.get('/logout', function(req, res, next){
+  delete global.currentUser;
+  res.redirect('/dashboard')
+})
 module.exports = router;
