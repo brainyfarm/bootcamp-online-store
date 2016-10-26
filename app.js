@@ -6,8 +6,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var firebase = require('firebase');
 require('dotenv').config()
+var firebase = require('firebase');
+var Jusibe = require('jusibe');
+var Jusibe = new Jusibe(process.env.jusibeKey, process.env.jusibeToken);
+
 
 var routes = require('./routes/index');
 
