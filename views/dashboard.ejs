@@ -4,11 +4,13 @@
 
       <div class="container">
         <!-- Page Content goes here -->
-            <h3 class="center arial">  Welcome <%= currentUserName %>!</h3>
+            <h4 class="center arial">  Welcome, <%= currentUserName %>!</h4>
 
 
             <% if(!currentUserLink) { %>
+
                 <% include partial/storeform %>
+            
             <% } %>
                 <strong> <%= currentUserLink %> </strong>
           
