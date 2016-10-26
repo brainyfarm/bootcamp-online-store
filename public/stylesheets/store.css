@@ -1,0 +1,146 @@
+@import url(http://fonts.googleapis.com/css?family=Duru+Sans);
+body {
+    font-family: 'Duru Sans', sans-serif;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+a:hover {
+    color: #000;
+}
+.absolute {
+    position: absolute;
+}
+.relative {
+    position: relative;
+}
+.hover {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.radius {
+    border-radius: 5px;
+}
+.product-list {
+    overflow: hidden;
+    padding: 40px 100px;
+}
+.product-list li {
+    overflow: hidden;
+    float: left;
+    margin: 10px;
+}
+.product-list li img {
+    border: 1px solid #eee;
+}
+.product-list li h3 {
+    font-size: 12px;
+    padding: 5px 0;
+}
+.product-list li h2 {
+    font-size: 14px;
+}
+.product-list li .new {
+    top: 10px;
+    right: -15px;
+    background: #ff0;
+    transform: rotate(45deg);
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 3px 20px;
+}
+.product-list li .add-to-favorites {
+    display: block;
+    top: -280px;
+    left: 40%;
+    text-indent: -9999px;
+    color: #ff0;
+    width: 0;
+    height: 0;
+    border-right: 25px solid transparent;
+    border-bottom: 17px solid #eee;
+    border-left: 25px solid transparent;
+    transform: rotate(35deg);
+}
+.product-list li .add-to-favorites:before {
+    border-bottom: 20px solid #eee;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -13px;
+    left: -18px;
+    display: block;
+    content: '';
+    transform: rotate(-35deg);
+}
+.product-list li .add-to-favorites:after {
+    position: absolute;
+    display: block;
+    color: #fc2e5a;
+    top: 3px;
+    left: -29px;
+    width: 0;
+    height: 0;
+    border-right: 25px solid transparent;
+    border-bottom: 17px solid #eee;
+    border-left: 25px solid transparent;
+    transform: rotate(-70deg);
+    content: '';
+}
+.product-list li .add-to-favorites:hover {
+    border-bottom-color: #ff0;
+}
+.product-list li .add-to-favorites:hover:before,
+.product-list li .add-to-favorites:hover:after {
+    border-bottom-color: #ff0;
+}
+.product-list li .add-to-cart {
+    top: 40%;
+    left: 20%;
+    background: #f00;
+    color: #fff;
+    padding: 10px 25px;
+    font-size: 16px;
+    border: 1px solid #f99;
+}
+.product-list li .add-to-cart:hover {
+    background: #000;
+    border-color: #aaa;
+}
+.product-list li .share {
+    bottom: 20%;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+.product-list li .share:hover {
+    color: #fff;
+}
+.product-list li .share-facebook {
+    left: 25%;
+    background: #eee;
+}
+.product-list li .share-facebook:hover {
+    background: #3b5998;
+}
+.product-list li .share-twitter {
+    right: 25%;
+    background: #eee;
+}
+.product-list li .share-twitter:hover {
+    background: #4099ff;
+}
+.product-list li:hover .hover {
+    opacity: 1;
+}
+.product-list li:hover img,
+.product-list li:hover .new {
+    filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -webkit-filter: blur(1px);
+}
