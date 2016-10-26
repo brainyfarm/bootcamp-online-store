@@ -22,14 +22,25 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Welcome to Store!' });
 });
 
+router.get('/store', function(req, res){
+      res.render('store', {title:"Store", })
+})
+
 
 router.get('/manage/:store_id', function(req, res){
-
+  var storeID = req.params.store_id;
+  console.log(storeID);
+  var db = firebase.database();
+  var ref = db.ref('/');
+  var userStoreRef = ref.child("stores/" + storeID  +'/' );
+      userStoreRef.on('value', function(snapshot){
+          console.log(snapshot.val());
+      })
       res.send("Manage Store");
 })
 router.get('/dashboard', function(req, res, next){
   /* If no user is signed in */
-  if(!global.currentUser)
+  if(!global.currentUser)                        
     res.redirect('/login');
 
   var db = firebase.database();
@@ -40,7 +51,6 @@ router.get('/dashboard', function(req, res, next){
   var storeOwnersRef = ref.child("owners/")
 
   usersRef.on('value', function(snapshot){
-    console.log(snapshot.val());
     var userName = snapshot.val().firstname;
       // console.log(userName);
 
@@ -53,9 +63,7 @@ router.get('/dashboard', function(req, res, next){
           else{
 
             storeOwnersRef.on('value', function(snapshot){
-              userLink = snapshot.val().currentUserID || null;
-              console.log(userLink);
-              
+              userLink = snapshot.val().currentUserID || null;              
             })
 
           }
@@ -80,19 +88,12 @@ router.post('/dashboard', function(req, res, next){
     var storename = req.body.storename;
     var storelink = uniqueUrl;
 
-    console.log(req.body);
-
-    console.log(currentUserID);
-    console.log(storename, "storname");
-    console.log(storelink, "storelink");
-
     var db = firebase.database();
     var ref = db.ref('/');
     var userStoreRef = ref.child("stores/" + storelink  );
     var ownersRef = ref.child("owners");
 
 
-  //console.log(userStoreRef);
     
     userStoreRef.set({
         storeowner : global.currentUserID,
@@ -100,14 +101,7 @@ router.post('/dashboard', function(req, res, next){
         storelink: storelink,
         products: []
     })
-    // .then(function(response){
-    // //console.log(response);
-        
-    // })
-    // .catch(function(error){
-    //   console.log(error.message);
-    // })
-
+    
     ownersRef.update({
             [currentUserID] : storelink
     })
@@ -137,8 +131,6 @@ router.post('/signup', function(req, res) {
         global.currentUserID = userObject.uid;
 
         var userID = userObject.uid;
-
-        console.log(userID);
 
         var db = firebase.database();
         var ref = db.ref('/');
@@ -185,9 +177,6 @@ router.post('/login', function(req, res) {
         global.currentUserID = userObject.uid;
 
         var userID = userObject.uid;
-
-        console.log(userID);
-
         var db = firebase.database();
         var ref = db.ref('/');
         var usersRef = ref.child("users/" + userID );
