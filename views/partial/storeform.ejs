@@ -1,0 +1,29 @@
+  <p class="center"> You do not have a store, create your store using the form below</p>
+            
+
+                    <div class="center">
+                    <div class="card small">
+                    <div class="card small teal">
+                        <div class="card-content white-text">
+                        <span class="card-title">CREATE STORE </span>
+
+                            <div class="input-field center">
+                                <form action="/dashboard" method="POST">
+
+                                        <div class="input-field ">
+                                            <i class="material-icons prefix">mail</i>
+                                             <input name="storename" id="storename" type="text" class="validate" required>
+                                             <input name="storelink" id="storelink" type="text" value=<%= freeUrl %> disabled required> 
+                                            <label for="storename">Store name</label>
+                                        </div>
+
+                                        <button class="waves-effect waves-light btn btn-large" type="submit">
+                                            <i class="material-icons left">create</i> Create Store
+                                        </button>
+                                </form>
+                            </div>   
+                         </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
