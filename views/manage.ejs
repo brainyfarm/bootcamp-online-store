@@ -1,0 +1,44 @@
+<% include partial/head %>
+<body>
+<% include partial/nav %>
+<% include partial/product-modal %>
+<div class="container">
+<h5> ITEMS IN  STORE </h5>
+    <table class="striped">
+        <thead>
+          <tr>
+              <th data-field="id">Item Name</th>
+              <th data-field="name">Price</th>
+              <th data-field="price">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Samsung R220</td>
+            <td>15000</td>
+            <td><a href="#">edit</a> | <a href="#">delete</a></td>
+          </tr>
+          <tr>
+            <td>Nokia 3310</td>
+            <td>12000</td>
+            <td><a href="#">edit</a> | <a href="#">delete</a></td>
+          </tr>
+
+          <tr>
+            <td>Sony Ericsson p900</td>
+            <td>18000</td>
+            <td><a href="#">edit</a> | <a href="#">delete</a></td>
+          </tr>
+
+          <tr>
+            <td>Motorolla T191</td>
+            <td>14000</td>
+            <td><a href="#">edit</a> | <a href="#">delete</a></td>
+          </tr>
+          
+        </tbody>
+      </table>
+      <a class="waves-effect waves-light btn btn-large modal-trigger" href="#productModal">Add Product</a>
+</div>
+</body>
