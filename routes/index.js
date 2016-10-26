@@ -22,8 +22,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Welcome to Store!' });
 });
 
-router.get('/store', function(req, res){
-      res.render('store', {title:"Store", })
+router.get('/store/:id', function(req, res){
+      var storeID = req.params.id;
+      console.log(storeID);
+      res.render('store', { title:"Store", currentStoreID :  storeID})
 })
 
 
