@@ -13,6 +13,7 @@
     "ejs": "latest",
     "express": "~4.13.4",
     "firebase": "^3.5.1",
+    "jusibe": "^0.2.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   }
