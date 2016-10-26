@@ -14,6 +14,20 @@ html {
     font-size: 40px !important;
 }
 
+.form-card{
+    width: 60% !important;
+    margin: 0 auto;
+}
+
+.storename{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.card-title{
+    font-weight: bold !important;
+}
+
 .top-text{
     color: #26a69a;
     font-size: 70px;
