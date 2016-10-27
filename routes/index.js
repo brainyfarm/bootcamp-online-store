@@ -6,6 +6,7 @@ var firebase = require('firebase');
 var Jusibe = require('jusibe');
 var Jusibe = new Jusibe(process.env.jusibeKey, process.env.jusibeToken);
 
+const requireLoginMiddleware = require('./login-middleware');
 
 /* A unique url generator */
 var uniqueUrl = (function (min, max) {
@@ -21,10 +22,9 @@ var uniqueUrl = (function (min, max) {
 })(65, 77);
 
 
-
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Welcome to Store!' });
+router.get('/', function (req, res) {
+  res.render('index', { title: 'Welcome to Ugele Store!' });
 });
 
 router.get('/store/:id', function (req, res) {
@@ -33,96 +33,67 @@ router.get('/store/:id', function (req, res) {
   res.render('store', { title: "Store", currentStoreID: storeID })
 })
 
-router.get('/dashboard', function (req, res, next) {
-  /* If no user is signed in */
-  if (!global.currentUser)
-    res.redirect('/login');
-
+router.get('/dashboard', requireLoginMiddleware, function (req, res, next) {
   var db = firebase.database();
   var ref = db.ref('/');
-  var usersRef = ref.child("users/" + global.currentUserID + '/');
-  var userStoreRef = ref.child("stores/" + global.currentUserID + '/');
-
-  var storeOwnersRef = ref.child("owners/")
+  var usersRef = ref.child(`users/${req.user.id}/`);
 
   usersRef.on('value', function (snapshot) {
-    var userName = snapshot.val().firstname;
-    // console.log(userName);
+    const { firstname: currentUserName, stores } = snapshot.val();
+    var currentStore;
 
-    userStoreRef.on('value', function (snapshot) {
-      var userStoreObject = snapshot.val();
-      var userLink;
-      if (!userName) {
-        userLink = null;
-      }
-      else {
+    if (stores) {
+      const link = Object.keys(stores)[0];
+      const name = stores[link];
 
-        storeOwnersRef.on('value', function (snapshot) {
-          userLink = snapshot.val().currentUserID || null;
-        })
+      currentStore = { link, name }; 
+    }
 
-      }
-      //console.log(userStoreObject);
+    res.render('dashboard', {
+      title: 'Dashboard',
+      currentUserName,
+      currentStore
+    });
 
+  });
+});
 
-      res.render('dashboard', {
-        title: 'Dashboard', currentUser: global.currentUser,
-        currentUserName: userName, currentUserLink: userLink,
-        freeUrl: uniqueUrl
-      });
-
-    })
-
-
-  })
-
-})
-
-
-router.post('/dashboard', function (req, res, next) {
-  var userID = global.currentUserID;
+router.post('/dashboard', requireLoginMiddleware, function (req, res, next) {
+  var userID = req.user.id;
   var storename = req.body.storename;
-  var storelink = uniqueUrl;
-
+  var storeLink = uniqueUrl;
 
   var db = firebase.database();
   var ref = db.ref('/');
-  var userStoreRef = ref.child("stores/" + storelink);
-  var ownersRef = ref.child("owners");
-
-
+  var userStoreRef = ref.child(`stores/${storeLink}`);
+  var userRef = ref.child(`users/${userID}/stores`);
 
   userStoreRef.set({
-    storeowner: global.currentUserID,
+    storeowner: userID,
     storename: storename,
-    storelink: storelink,
-    products: []
+    storelink: storeLink
   })
 
-  ownersRef.update({
-    [currentUserID]: storelink
+  userRef.update({
+    [storeLink]: storename
   })
 
   // Send an sms containing store link
   var payload = {
     to: global.currentUserPhone,
     from: 'UGELE',
-    message: 'The link to your store is /store/' + storelink
+    message: `The link to your Ugele store is /store/${storeLink}`
   };
 
-  Jusibe.sendSMS(payload, function (err, res) {
-    if (res.statusCode === 200)
-      console.log(res.body);
-    else
-      console.log(err);
-  });
+  // Jusibe.sendSMS(payload, function (err, res) {
+  //   if (res.statusCode === 200)
+  //     console.log(res.body);
+  //   else
+  //     console.log(err);
+  // });
 
-  res.redirect('/manage/' + storelink);
-
-
-
-
-})
+  res.redirect(`/manage/${storeLink}`);
+});
 
 router.get('/signup', function (req, res, next) {
   res.render('signup', { title: 'Create an account' })
@@ -139,11 +110,6 @@ router.post('/signup', function (req, res) {
     .createUserWithEmailAndPassword(email, password)
 
     .then(function (userObject) {
-      global.currentUser = userObject.email;
-      global.currentUserID = userObject.uid;
-      global.currentUserPhone = phoneNumber;
-      global.currentUserName = firstName;
-
       var userID = userObject.uid;
 
       var db = firebase.database();
@@ -186,14 +152,6 @@ router.post('/login', function (req, res) {
     .signInWithEmailAndPassword(email, password)
 
     .then(function (userObject) {
-      global.currentUser = userObject.email;
-      global.currentUserID = userObject.uid;
-
-      var userID = userObject.uid;
-      var db = firebase.database();
-      var ref = db.ref('/');
-      var usersRef = ref.child("users/" + userID);
-
       res.redirect('/dashboard');
     })
 
@@ -211,7 +169,7 @@ router.get('/logout', function (req, res, next) {
 })
 
 
-router.get('/manage/:id', function(req, res){
-  res.render('manage', {currentUserName : global.currentUserName});
+router.get('/manage/:id', requireLoginMiddleware, function (req, res) {
+  res.render('manage');
 })
 module.exports = router;
