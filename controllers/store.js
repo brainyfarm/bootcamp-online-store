@@ -14,14 +14,16 @@ function getStoreInfo(storeLink) {
       const items = snapshot.val().items;
 
       let storeItems = [];
-      Object.keys(items).map(itemKey => {
-        const productName = items[itemKey].productName;
-        const productPrice = items[itemKey].productPrice;
-        const description = items[itemKey].description;
-        const productImage = items[itemKey].productImage;
+      if (items) {
+        Object.keys(items).map(itemKey => {
+          const productName = items[itemKey].productName;
+          const productPrice = items[itemKey].productPrice;
+          const description = items[itemKey].description;
+          const productImage = items[itemKey].productImage;
 
-        storeItems.push({ productName, productPrice, description, productImage, itemKey });
-      });
+          storeItems.push({ productName, productPrice, description, productImage, itemKey });
+        });
+      }
 
       return { storeName, storeItems };
     })
@@ -39,7 +41,7 @@ function deleteStoreItem(req, res) {
 }
 
 function manageStore(req, res) {
-  if (!req.user.store.link) {
+  if (!req.user.store) {
     res.send("Please create a store first.");
     return;
   }

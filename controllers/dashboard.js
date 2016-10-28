@@ -37,11 +37,14 @@ function post(req, res, next) {
     [storeLink]: storename
   })
 
+  // Temporary fix
+  global.userInfo.store = { link: storeLink, name: storename };
+
   // Send an sms containing store link
   const payload = {
     to: req.user.phone,
     from: 'UGELE',
-    message: `The Ugele public link store is ${req.hostname}/store/${storeLink}`
+    message: `Your store public link on Ugele is ${req.hostname}/store/${storeLink}`
   };
 
   Jusibe.sendSMS(payload, function sendSMSCallback(err, res) {
