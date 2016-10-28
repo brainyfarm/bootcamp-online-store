@@ -8,10 +8,6 @@ module.exports = function loginMiddleware(req, res, next) {
 
     let name, phone, store;
     
-    // A hackish session.
-    // Todo: Find a better way. A proper session storage maybe?
-    // This is set in auth.js UpdateUserInfo
-    // Yes, I know globals are bad. :(
     if (global.userInfo) {
       name = global.userInfo.firstname;
       store = global.userInfo.store;
