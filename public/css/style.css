@@ -40,7 +40,7 @@ nav .nav-wrapper{
 
 .top-text{
     color: #26a69a;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     font-family: 'Simonetta', cursive;
 }
@@ -101,6 +101,27 @@ font-family: 'Simonetta', cursive;
 
 .store {
    text-transform: capitalize !important;
+}
+
+.mtl {
+    margin-top: 50px;
+}
+
+.indicators{
+    display: none !important;
+}
+
+.btn, .btn-large, .btn-flat {
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 2rem;
+    text-transform: capitalize !important;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
 }
 
 
