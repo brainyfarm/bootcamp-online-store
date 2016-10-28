@@ -1,30 +1,15 @@
 // Require necessary packages
-
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-require('dotenv').config()
-var firebase = require('firebase');
-var Jusibe = require('jusibe');
-var Jusibe = new Jusibe(process.env.jusibeKey, process.env.jusibeToken);
-
 
 var routes = require('./routes/index');
 
 var app = express();
-
-// configure firebase with app
-// Initialize Firebase
-var config = {
-  apiKey: process.env.apiKey,
-  authDomain: process.env.authDomain,
-  databaseURL: process.env.databaseURL,
-  storageBucket: process.env.storageBucket,
-};
-firebase.initializeApp(config);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
