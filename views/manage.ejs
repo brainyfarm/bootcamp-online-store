@@ -3,7 +3,7 @@
 <% include partial/nav %>
 <% include partial/product-modal %>
 <div class="container">
-<h5> ITEMS IN <%= store.name.toUpperCase() %> STORE </h5>
+<h5><%= store.name.toUpperCase() %></h5>
 <p>Public URL: <a href="/store/<%= store.link %>"><%= baseUrl %>/store/<%= store.link %></a>
     <table class="striped">
         <thead>
@@ -23,6 +23,6 @@
         <% }); %>  
         </tbody>
       </table>
-      <a class="waves-effect waves-light btn btn-large modal-trigger" href="#productModal">Add Product</a>
+      <a class="waves-effect waves-light btn btn-large modal-trigger mtl" href="#productModal">Add Product</a>
 </div>
 </body>
