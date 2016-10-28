@@ -3,40 +3,24 @@
 <% include partial/nav %>
 <% include partial/product-modal %>
 <div class="container">
-<h5> ITEMS IN  STORE </h5>
+<h5> ITEMS IN <%= store.name.toUpperCase() %> STORE </h5>
+<p>Public URL: <a href="/store/<%= store.link %>"><%= baseUrl %>/store/<%= store.link %></a>
     <table class="striped">
         <thead>
           <tr>
               <th data-field="id">Item Name</th>
               <th data-field="name">Price</th>
-              <th data-field="price">Action</th>
+              <th data-field="price">description</th>
           </tr>
         </thead>
-
         <tbody>
+        <% storeItems.forEach(function (item) { %>
           <tr>
-            <td>Samsung R220</td>
-            <td>15000</td>
-            <td><a href="#">edit</a> | <a href="#">delete</a></td>
+            <td title="<%= item.description %>"><%= item.productName %></td>
+            <td><%= item.productPrice %></td>
+            <td><%= item.description %></td>
           </tr>
-          <tr>
-            <td>Nokia 3310</td>
-            <td>12000</td>
-            <td><a href="#">edit</a> | <a href="#">delete</a></td>
-          </tr>
-
-          <tr>
-            <td>Sony Ericsson p900</td>
-            <td>18000</td>
-            <td><a href="#">edit</a> | <a href="#">delete</a></td>
-          </tr>
-
-          <tr>
-            <td>Motorolla T191</td>
-            <td>14000</td>
-            <td><a href="#">edit</a> | <a href="#">delete</a></td>
-          </tr>
-          
+        <% }); %>  
         </tbody>
       </table>
       <a class="waves-effect waves-light btn btn-large modal-trigger" href="#productModal">Add Product</a>
