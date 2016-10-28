@@ -33,10 +33,12 @@ function post(req, res, next) {
     storelink: storeLink
   })
 
-
   userRef.update({
     [storeLink]: storename
   })
+
+  // Temporary fix
+  global.userInfo.store = { link: storeLink, name: storename };
 
   // Send an sms containing store link
   const payload = {
