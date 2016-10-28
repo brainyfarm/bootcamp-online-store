@@ -24,31 +24,34 @@ html {
     text-transform: uppercase;
 }
 
+nav .nav-wrapper{
+    padding-left: 10px !important;
+    padding-left: 10px !important;
+}
+
 .card-title{
     font-weight: bold !important;
 }
 
+.caption h4{
+    font-family: 'Simonetta', cursive;
+
+}
+
 .top-text{
     color: #26a69a;
-    font-size: 70px;
+    font-size: 40px;
     font-weight: bold;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Simonetta', cursive;
 }
 
-.details{
-    font-family: Georgia, 'Times New Roman', Times, serif;
 
-}
 
 .uppercase{
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.arial{
-    font-weight: bold;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
 
 .teal-text{
     color: #26a69a;
@@ -58,7 +61,7 @@ html {
     word-spacing: 0.3em;
 }
 .nav{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+font-family: 'Simonetta', cursive;
 }
 .description-text{
     letter-spacing: 0.01em;
@@ -96,9 +99,15 @@ html {
 }
 
 
+.store {
+   text-transform: capitalize !important;
+}
+
+
 @import url(http://fonts.googleapis.com/css?family=Duru+Sans);
 body {
-    font-family: 'Duru Sans', sans-serif;
+font-family: 'Simonetta', cursive !important;
+font-size: 18px !important;
 }
 a {
     text-decoration: none;
@@ -142,7 +151,7 @@ a:hover {
 .product-list li .new {
     top: 10px;
     right: -15px;
-    background: #ff0;
+    background: teal;
     transform: rotate(45deg);
     font-size: 10px;
     text-transform: uppercase;
@@ -245,17 +254,27 @@ a:hover {
 
 .caption{
     margin-top: 50px !important;
+    color: #FFFFEE !important;
 }
 .caption h2{
-        text-transform: uppercase;
-        font-size: 60px;
+        text-transform: capitalize;
+        font-size: 50px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 
 }
 
-.top-text:hover{
-    color: #FFF;
+.slider{
+    height: 520px !important;
 }
+
+.slides{
+    height: 500px !important;
+}
+
+.login-btn{
+    margin-left: 10px !important;
+}
+
 
 nav li{
     font-weight: bold;
@@ -263,4 +282,12 @@ nav li{
 
 .body-container{
     margin-top: -20px !important;
+}
+
+.body{
+    margin: 0 auto;
+}
+
+.body li{
+    margin-left: 100px;
 }
