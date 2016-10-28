@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Online Store is a web application built for individuals as well as small scale business to help them create their own stores, add products and sell online for free [Heroku](https://maintenance-tracker.herokuapp.com).
+Online Store is a web application built for individuals as well as small scale business to help them create their own stores, add products and sell online for free [Heroku](https://bc-21-online-store.herokuapp.com/).
 
 ## Features
 
