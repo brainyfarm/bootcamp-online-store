@@ -1,9 +1,5 @@
 <% include partial/head %>
 <% include partial/nav %>
 <div class="container">
-    <h4 class="center arial"> Welcome, <%= currentUserName %>!</h4>
-        <% if(!currentStore) { %>
+    <h4 class="center"> <strong>  Welcome, <%= currentUserName %>! </strong></h4>
             <% include partial/storeform %>
-        <% } else { %>
-        <div class="card-panel center"><strong> Manage <a class="blue lighten-5" href="/manage/<%= currentStore.link %>"><%= currentStore.name %></a></strong></div>
-    <% } %>
