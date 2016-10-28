@@ -1,7 +1,5 @@
+/* Require and set up firebase */
 var firebase = require('firebase');
-
-// configure firebase with app
-// Initialize Firebase
 var config = {
   apiKey: process.env.apiKey,
   authDomain: process.env.authDomain,
