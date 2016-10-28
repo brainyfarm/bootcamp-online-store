@@ -5,7 +5,7 @@ function getStoreInfo(storeLink) {
   const userStoreRef = ref.child(`stores/${storeLink}`);
 
   return userStoreRef.once("value")
-    .then((snapshot)=> {
+    .then((snapshot) => {
       if (!snapshot.val()) {
         return null;
       };
@@ -47,8 +47,10 @@ function manageStore(req, res) {
   }
 
   getStoreInfo(req.user.store.link).then((data) => {
-    res.render('manage', { currentUserName: req.user.name,
-       store: req.user.store, storeItems: data.storeItems, baseUrl: req.hostname });
+    res.render('manage', {
+      currentUserName: req.user.name,
+      store: req.user.store, storeItems: data.storeItems, baseUrl: req.hostname
+    });
   })
 }
 
@@ -80,13 +82,15 @@ function viewStore(req, res) {
       return;
     }
 
-    res.render('store', { title: "Store", currentStoreID: storeID,
-     storeName: data.storeName, storeItems: data.storeItems })
+    res.render('store', {
+      title: "Store", currentStoreID: storeID,
+      storeName: data.storeName, storeItems: data.storeItems
+    })
   });
 }
 
 module.exports = {
-    manageStore,
-    viewStore,
-    addItemToStore
+  manageStore,
+  viewStore,
+  addItemToStore
 }
