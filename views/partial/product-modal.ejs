@@ -1,7 +1,7 @@
 <div id="productModal" class="modal">
     <div class="modal-content">
         <h5>NEW PRODUCT</h5>
-        <form>
+        <form method="post" action="/store/update">
             <div class="input-field ">
                 <i class="material-icons prefix">edit</i>
                 <input name="productname" id="productname" type="text" class="validate" required>
@@ -22,7 +22,7 @@
 
             <div class="input-field ">
                 <i class="material-icons prefix">photo_camera</i>
-                <input name="image" id="image" type="file" class="validate" required>
+                <input name="image" id="image" type="text" class="validate" required>
             </div>
 
             <br />
