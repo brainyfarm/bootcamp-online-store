@@ -33,6 +33,7 @@ function post(req, res, next) {
     storelink: storeLink
   })
 
+
   userRef.update({
     [storeLink]: storename
   })
@@ -41,7 +42,7 @@ function post(req, res, next) {
   const payload = {
     to: req.user.phone,
     from: 'UGELE',
-    message: `The Ugele public link store is ${req.hostname}/store/${storeLink}`
+    message: `Your store public link on Ugele is ${req.hostname}/store/${storeLink}`
   };
 
   Jusibe.sendSMS(payload, function sendSMSCallback(err, res) {
