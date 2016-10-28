@@ -19,12 +19,23 @@ function updateUserInfo(reference) {
     });
 }
 
+/**
+ * getSignup
+ * Handler for the signup GET route
+ * @param {any} req
+ * @param {any} res
+ * @param {any} next
+ */
 function getSignup(req, res, next) {
     res.render('signup', { title: 'Create an account' })
 }
-
+/**
+ * postSignup
+ * Handler for the signup POST route
+ * @param {any} req
+ * @param {any} res
+ */
 function postSignup(req, res) {
-    // Getting email and password variables
     const phoneNumber = req.body.phone;
     const email = req.body.email;
     const password = req.body.password;
@@ -59,6 +70,12 @@ function postSignup(req, res) {
         })
 }
 
+/**
+ * getLogin
+ * Handles the login route
+ * @param {any} req
+ * @param {any} res
+ */
 function getLogin(req, res) {
     // Todo: Check if a user is already logged in.
     res.render('login', { title: "Login" })
@@ -86,6 +103,13 @@ function postLogin(req, res) {
         })
 }
 
+/**
+ * logout
+ * Handler for the logout route.
+ * @param {any} req
+ * @param {any} res
+ * @param {any} next
+ */
 function logout(req, res, next) {
     firebase.auth()
         .signOut()

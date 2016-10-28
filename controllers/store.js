@@ -1,5 +1,11 @@
 const db = require('../helpers/firebase').database();
 
+/**
+ * getStoreInfo
+ * Get 
+ * @param {any} storeLink
+ * @returns
+ */
 function getStoreInfo(storeLink) {
   const ref = db.ref('/');
   const userStoreRef = ref.child(`stores/${storeLink}`);
@@ -28,7 +34,12 @@ function getStoreInfo(storeLink) {
       return { storeName, storeItems };
     })
 }
-
+/**
+ * deleteStoreItem
+ * Delete an item from the store 
+ * @param {any} req
+ * @param {any} res
+ */
 function deleteStoreItem(req, res) {
   db.ref(`/stores/${req.user.store.link}/items/${req.params.itemKey}`)
     .remove()
