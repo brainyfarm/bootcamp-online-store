@@ -1,0 +1,39 @@
+<% include partial/head %>
+	<body translate="no">
+		<nav class="teal">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">
+					<%= storeName %>
+				</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li>
+						<a href="contact"> <i class="material-icons left">phone</i> Contact</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="body">
+			<h4 class="center"> AVAILABLE ITEMS </h4>
+			<ul class="product-list">
+                <% storeItems.forEach(function(item) { %>
+				<li class="relative">
+                    <img class="radius" src="<%= item.productImage %>" title="<%= item.description %>" alt="<%= item.description %>" width="200" height="300"/>
+					<h2 class="product-name center">
+                        <a href="#product-page" title="<%= item.productName %>"><%= item.productName %></a></h2>
+                        <small class="new absolute">New</small>
+                        <a class="add-to-cart absolute radius hover" href="#" title="">$<%= item.productPrice %></a>
+                        <a class="share share-facebook absolute hover" href="#share-facebook" title="Share on Facebook">f</a>
+                        <a class="share share-twitter absolute hover" href="#share-twitter" title="Share on Twitter">t</a>
+                </li>
+                <% }) %>
+				<!--<li class="relative"> <img class="radius" src="http://lorempixel.com/200/300/fashion/2/" alt="Brand Name | Product Name" width="200" height="300"
+					/>
+					<h2 class="product-name"><a href="#product-page" title="Product Name">Product Name</a></h2> <a class="add-to-cart absolute radius hover" href="#"
+						title="">Details</a> <a class="share share-facebook absolute hover" href="#share-facebook" title="Share on Facebook">f</a>					<a class="share share-twitter absolute hover" href="#share-twitter" title="Share on Twitter">t</a> </li>
+				<li class="relative"> <img class="radius" src="http://lorempixel.com/200/300/fashion/3/" alt="Brand Name | Product Name" width="200" height="300"
+					/>
+					<h2 class="product-name"><a href="#product-page" title="Product Name">Product Name</a></h2> <small class="new absolute">New</small> <a class="add-to-cart absolute radius hover"
+						href="#" title="">Details</a> <a class="share share-facebook absolute hover" href="#share-facebook" title="Share on Facebook">f</a>					<a class="share share-twitter absolute hover" href="#share-twitter" title="Share on Twitter">t</a> </li>-->
+			</ul>
+		</div>
+	</body>

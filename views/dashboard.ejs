@@ -1,1 +1,5 @@
-<h2> Signed in as <%= currentUser %> </h2>
+<% include partial/head %>
+<% include partial/nav %>
+<div class="container">
+    <h4 class="center"> <strong>  Welcome, <%= currentUserName %>! </strong></h4>
+            <% include partial/storeform %>

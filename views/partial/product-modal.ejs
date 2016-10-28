@@ -1,0 +1,35 @@
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <h5>NEW PRODUCT</h5>
+        <form method="post" action="/store/update">
+            <div class="input-field ">
+                <i class="material-icons prefix">edit</i>
+                <input name="productname" id="productname" type="text" class="validate" required>
+                <label for="productname">Product Name</label>
+            </div>
+
+            <div class="input-field ">
+                <i class="material-icons prefix">euro_symbol</i>
+                <input name="productprice" id="productprice" type="number" class="validate" required>
+                <label for="productprice">Product Price</label>
+            </div>
+
+            <div class="input-field ">
+                <i class="material-icons prefix">comment</i>
+                <input name="description" id="description" type="text" class="validate" required>
+                <label for="description">Short Description</label>
+            </div>
+
+            <div class="input-field ">
+                <i class="material-icons prefix">photo_camera</i>
+                <input name="image" id="image" type="text" class="validate" required>
+            </div>
+
+            <br />
+
+            <div class="input-field">
+                <button class="waves-effect waves-light btn btn-large">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

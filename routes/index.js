@@ -1,106 +1,25 @@
-var express = require('express');
-var router = express.Router();
-var firebase = require('firebase');
+const express = require('express');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const requireLoginMiddleware = require('./login-middleware');
+const homeCtrl = require('../controllers/home');
+const dashboardCtrl = require('../controllers/dashboard');
+const authCtrl = require('../controllers/auth');
+const storeCtrl = require('../controllers/store');
 
-router.get('/dashboard', function(req, res, next){
-  /* If no user is signed in */
-  if(!global.currentUser)
-    res.redirect('/login');
-    
-  res.render('dashboard', {title: 'Dashboard', currentUser : global.currentUser});
-})
+router.get('/', homeCtrl.home);
 
-router.get('/signup', function(req, res, next) {
-  res.render('signup', {title: 'Create an account'})
-});
+router.get('/dashboard', requireLoginMiddleware, dashboardCtrl.get);
+router.post('/dashboard', requireLoginMiddleware, dashboardCtrl.post);
 
-router.post('/signup', function(req, res) {
-  // Getting email and password variables
-  var email = req.body.email;
-  var password = req.body.password;
-  var lastName = req.body.lastname;
+router.get('/signup', authCtrl.getSignup);
+router.post('/signup', authCtrl.postSignup);
+router.get('/login', authCtrl.getLogin);
+router.post('/login', authCtrl.postLogin);
+router.get('/logout', authCtrl.logout);
 
-  firebase.auth()
-  .createUserWithEmailAndPassword(email, password)
-    
-    .then(function(userObject){
-        global.currentUser = userObject.email;
-        global.currentUserID = userObject.uid;
-
-        var userID = userObject.uid;
-
-        console.log(userID);
-
-        var db = firebase.database();
-        var ref = db.ref('/');
-        var usersRef = ref.child("users/" + userID );
-
-        // Write the user joined date to the user table in db
-        usersRef.set({
-              joined: new Date().toISOString(), 
-              lastname: lastName
-        })
-
-        res.redirect('/dashboard');
-    })
-
-    .catch(function(error) {
-    // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      return res.send(errorMessage);
-    })
-});
-
-// Login GET route
-router.get('/login', function(req, res){
-  // Check later if a user is already logged in.
-    res.render('login', {title:"Login"})
-})
-
-// Login POST route 
-
-
-router.post('/login', function(req, res) {
-  // Getting email and password variables
-  var email = req.body.email;
-  var password = req.body.password;
-
-  firebase.auth()
-  .signInWithEmailAndPassword(email, password)
-    
-    .then(function(userObject){
-        global.currentUser = userObject.email;
-        global.currentUserID = userObject.uid;
-
-
-
-        var userID = userObject.uid;
-
-        console.log(userID);
-
-        var db = firebase.database();
-        var ref = db.ref('/');
-        var usersRef = ref.child("users/" + userID );
-
-      
-
-
-
-        res.redirect('/dashboard');
-    })
-
-    .catch(function(error) {
-    // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      return res.send(errorMessage);
-    })
-});
+router.get('/manage', requireLoginMiddleware, storeCtrl.manageStore);
+router.get('/store/:storeID', storeCtrl.viewStore);
+router.post('/store/update', requireLoginMiddleware, storeCtrl.addItemToStore);
 
 module.exports = router;
