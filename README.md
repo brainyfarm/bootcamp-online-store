@@ -31,7 +31,7 @@ Online Store is a web application built for individuals as well as small scale b
 
 
 ## Setup
-Before we begin, ensure you have the required softwares to run this application.
+Before we begin, ensure you have the required software to run this application.
 
 ### Major Dependencies.
 - [Node.js](nodejs.org) - A version with ECMAScript 2015 (ES6) support.
